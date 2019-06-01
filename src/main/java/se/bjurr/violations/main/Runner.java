@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-
 import se.bjurr.violations.comments.lib.ViolationsLogger;
 import se.bjurr.violations.lib.model.SEVERITY;
 import se.bjurr.violations.lib.model.Violation;
@@ -231,19 +230,19 @@ public class Runner {
           .withCommentTemplate(commentTemplate) //
           .withMaxNumberOfViolations(maxNumberOfViolations) //
           .withViolationsLogger(
-                  new ViolationsLogger() {
-                    @Override
-                    public void log(final Level level, final String string) {
-                      System.out.println(level + " " + string);
-                    }
+              new ViolationsLogger() {
+                @Override
+                public void log(final Level level, final String string) {
+                  System.out.println(level + " " + string);
+                }
 
-                    @Override
-                    public void log(final Level level, final String string, final Throwable t) {
-                      final StringWriter sw = new StringWriter();
-                      t.printStackTrace(new PrintWriter(sw));
-                      System.out.println(level + " " + string + "\n" + sw.toString());
-                    }
-                  }) //
+                @Override
+                public void log(final Level level, final String string, final Throwable t) {
+                  final StringWriter sw = new StringWriter();
+                  t.printStackTrace(new PrintWriter(sw));
+                  System.out.println(level + " " + string + "\n" + sw.toString());
+                }
+              }) //
           .toPullRequest();
     } catch (final Exception e) {
       e.printStackTrace();
