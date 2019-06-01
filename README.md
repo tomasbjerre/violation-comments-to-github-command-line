@@ -6,6 +6,8 @@
 
 Report static code analysis to GitHub. It uses the [Violations Lib](https://github.com/tomasbjerre/violations-lib).
 
+![GitHub Comment](/github-comment.png)
+
 The runnable can be found in [NPM](https://www.npmjs.com/package/violation-comments-to-github-command-line).
 
 Run it with:
