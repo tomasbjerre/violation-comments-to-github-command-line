@@ -100,7 +100,7 @@ Missing a format? Open an issue [here](https://github.com/tomasbjerre/violations
                                                         <string>: any string
                                                         Default: 
 -create-comment-with-all-single-file-comments, -        <boolean>: true or false
-ccwasfc <boolean>                                       Default: true
+ccwasfc <boolean>                                       Default: false
 -create-single-file-comments, -csfc <boolean>           <boolean>: true or false
                                                         Default: true
 -github-url, -ghu <string>                              <string>: any string
