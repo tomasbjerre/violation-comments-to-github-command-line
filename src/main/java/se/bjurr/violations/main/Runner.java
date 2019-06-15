@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
+
 import se.bjurr.violations.comments.lib.ViolationsLogger;
 import se.bjurr.violations.lib.model.SEVERITY;
 import se.bjurr.violations.lib.model.Violation;
@@ -60,7 +61,7 @@ public class Runner {
             .collect(Collectors.joining(", "));
     final Argument<List<List<String>>> violationsArg =
         stringArgument("--violations", "-v")
-            .variableArity()
+            .arity(4)
             .repeated()
             .description(
                 "The violations to look for. <PARSER> <FOLDER> <REGEXP PATTERN> <NAME> where PARSER is one of: "
