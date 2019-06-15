@@ -177,6 +177,7 @@ ccwasfc <boolean>                                       Default: false
                                                         "JSHint" [Supports Multiple occurrences]
                                                         <string>: any string
                                                         Default: Empty list
+                                                        Default: Empty list
 ```
 
 Checkout the [Violations Lib](https://github.com/tomasbjerre/violations-lib) for more documentation.
