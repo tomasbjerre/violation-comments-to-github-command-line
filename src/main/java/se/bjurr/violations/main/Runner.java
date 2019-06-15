@@ -49,6 +49,7 @@ public class Runner {
   private boolean keepOldComments;
   private String commentTemplate;
   private Integer maxNumberOfViolations;
+  private boolean commentOnlyChangedFiles = true;
 
   public void main(final String args[]) throws Exception {
     final Argument<?> helpArgument = helpArgument("-h", "--help");
@@ -79,6 +80,8 @@ public class Runner {
 
     final Argument<Boolean> commentOnlyChangedContentArg =
         booleanArgument("-comment-only-changed-content", "-cocc").defaultValue(true).build();
+    final Argument<Boolean> commentOnlyChangedFilesArg =
+        booleanArgument("-comment-only-changed-files", "-cocf").defaultValue(true).build();
     final Argument<Boolean> createCommentWithAllSingleFileCommentsArg =
         booleanArgument("-create-comment-with-all-single-file-comments", "-ccwasfc")
             .defaultValue(false)
@@ -123,6 +126,7 @@ public class Runner {
                   minSeverityArg, //
                   showDebugInfo, //
                   commentOnlyChangedContentArg, //
+                  commentOnlyChangedFilesArg, //
                   createCommentWithAllSingleFileCommentsArg, //
                   createSingleFileCommentsArg, //
                   keepOldCommentsArg, //
@@ -141,6 +145,7 @@ public class Runner {
       this.violations = parsed.get(violationsArg);
       this.minSeverity = parsed.get(minSeverityArg);
       this.commentOnlyChangedContent = parsed.get(commentOnlyChangedContentArg);
+      this.commentOnlyChangedFiles = parsed.get(commentOnlyChangedFilesArg);
       this.createCommentWithAllSingleFileComments =
           parsed.get(createCommentWithAllSingleFileCommentsArg);
       this.createSingleFileComments = parsed.get(createSingleFileCommentsArg);
@@ -226,6 +231,7 @@ public class Runner {
           .withCreateCommentWithAllSingleFileComments(createCommentWithAllSingleFileComments) //
           .withCreateSingleFileComments(createSingleFileComments) //
           .withCommentOnlyChangedContent(commentOnlyChangedContent) //
+          .withCommentOnlyChangedFiles(commentOnlyChangedFiles) //
           .withKeepOldComments(keepOldComments) //
           .withCommentTemplate(commentTemplate) //
           .withMaxNumberOfViolations(maxNumberOfViolations) //

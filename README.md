@@ -74,6 +74,7 @@ A number of **parsers** have been implemented. Some **parsers** can parse output
 | [_Infer_](http://fbinfer.com/)                                                        | `PMD`                | Facebook Infer. With `--pmd-xml`.
 | [_JCReport_](https://github.com/jCoderZ/fawkez/wiki/JcReport)                         | `JCREPORT`           | 
 | [_JSHint_](http://jshint.com/)                                                        | `JSHINT`             | 
+| [_JUnit_](https://junit.org/junit4/)                                                  | `JUNIT`              | 
 | [_KTLint_](https://github.com/shyiko/ktlint)                                          | `CHECKSTYLE`         | 
 | [_Klocwork_](http://www.klocwork.com/products-services/klocwork/static-code-analysis)  | `KLOCWORK`           | 
 | [_KotlinGradle_](https://github.com/JetBrains/kotlin)                                 | `KOTLINGRADLE`       | Output from Kotlin Gradle Plugin.
@@ -114,6 +115,8 @@ Missing a format? Open an issue [here](https://github.com/tomasbjerre/violations
 
 ```shell
 -comment-only-changed-content, -cocc <boolean>          <boolean>: true or false
+                                                        Default: true
+-comment-only-changed-files, -cocf <boolean>            <boolean>: true or false
                                                         Default: true
 -comment-template <string>                              See https://github.
                                                         com/tomasbjerre/violation-comments-lib
