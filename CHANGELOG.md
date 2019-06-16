@@ -3,6 +3,20 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.6
+### No issue
+
+**commentOnlyChangedFiles**
+
+
+[b91dcbc309ee169](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/b91dcbc309ee169) Tomas Bjerre *2019-06-16 17:02:51*
+
+**changelog**
+
+
+[8a8e99d38d60459](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/8a8e99d38d60459) Tomas Bjerre *2019-06-15 19:17:00*
+
+
 ## 1.5
 ### GitHub [#1](https://github.com/tomasbjerre/violation-comments-to-github-command-line/issues/1) Multiple -v not working    *bug*  
 
