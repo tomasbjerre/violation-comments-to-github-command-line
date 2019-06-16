@@ -116,7 +116,11 @@ Missing a format? Open an issue [here](https://github.com/tomasbjerre/violations
 ```shell
 -comment-only-changed-content, -cocc <boolean>          <boolean>: true or false
                                                         Default: true
--comment-only-changed-files, -cocf <boolean>            <boolean>: true or false
+-comment-only-changed-files, -cocf <boolean>            True if only changed 
+                                                        files should be commented. 
+                                                        False if all findings should 
+                                                        be commented.
+                                                        <boolean>: true or false
                                                         Default: true
 -comment-template <string>                              See https://github.
                                                         com/tomasbjerre/violation-comments-lib

@@ -81,7 +81,11 @@ public class Runner {
     final Argument<Boolean> commentOnlyChangedContentArg =
         booleanArgument("-comment-only-changed-content", "-cocc").defaultValue(true).build();
     final Argument<Boolean> commentOnlyChangedFilesArg =
-        booleanArgument("-comment-only-changed-files", "-cocf").defaultValue(true).build();
+        booleanArgument("-comment-only-changed-files", "-cocf")
+            .defaultValue(true)
+            .description(
+                "True if only changed files should be commented. False if all findings should be commented.")
+            .build();
     final Argument<Boolean> createCommentWithAllSingleFileCommentsArg =
         booleanArgument("-create-comment-with-all-single-file-comments", "-ccwasfc")
             .defaultValue(false)
