@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.8
+### No issue
+
+**Removing newline before fingerprint**
+
+
+[ee2443ff5cda2fb](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/ee2443ff5cda2fb) Tomas Bjerre *2019-08-29 18:44:53*
+
+
 ## 1.7
 ### No issue
 
