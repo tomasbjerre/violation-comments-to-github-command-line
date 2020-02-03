@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.10
+### GitHub #82   
+
+**CPPCheckParser with auto closed <error/> tags tomasbjerre/violations-lib**
+
+
+[0eb65f8ecbd2b8d](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/0eb65f8ecbd2b8d) Tomas Bjerre *2020-02-03 16:26:47*
+
+
 ## 1.9
 ### GitHub #80   
 
