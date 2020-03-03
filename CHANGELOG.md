@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.11
+### GitHub #84   
+
+**XUnit tomasbjerre/violations-lib**
+
+
+[a431beaf9b6512b](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/a431beaf9b6512b) Tomas Bjerre *2020-03-03 19:06:11*
+
+
 ## 1.10
 ### GitHub #82   
 
