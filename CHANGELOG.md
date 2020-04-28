@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.12
+### GitHub #9   
+
+**Correcting line in single file comments tomasbjerre/violation-comments-to-github-lib**
+
+
+[630c5af651127b4](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/630c5af651127b4) Tomas Bjerre *2020-04-28 17:28:06*
+
+
 ## 1.11
 ### GitHub #84   
 
