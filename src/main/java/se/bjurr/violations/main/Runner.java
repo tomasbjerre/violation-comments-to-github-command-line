@@ -16,9 +16,12 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-import se.bjurr.violations.comments.lib.ViolationsLogger;
+import se.bjurr.violations.lib.FilteringViolationsLogger;
+import se.bjurr.violations.lib.ViolationsLogger;
 import se.bjurr.violations.lib.model.SEVERITY;
 import se.bjurr.violations.lib.model.Violation;
 import se.bjurr.violations.lib.reports.Parser;
@@ -50,6 +53,7 @@ public class Runner {
   private String commentTemplate;
   private Integer maxNumberOfViolations;
   private boolean commentOnlyChangedFiles = true;
+  private boolean showDebugInfo;
 
   public void main(final String args[]) throws Exception {
     final Argument<?> helpArgument = helpArgument("-h", "--help");
@@ -164,8 +168,8 @@ public class Runner {
       this.password = parsed.get(passwordArg);
       this.gitHubUrl = parsed.get(gitHubUrlArg);
       this.maxNumberOfViolations = parsed.get(maxNumberOfViolationsArg);
-
-      if (parsed.wasGiven(showDebugInfo)) {
+      this.showDebugInfo = parsed.wasGiven(showDebugInfo);
+      if (this.showDebugInfo) {
         System.out.println(
             "Given parameters:\n"
                 + Arrays.asList(args)
@@ -181,15 +185,34 @@ public class Runner {
       System.exit(1);
     }
 
-    if (pullRequestId == null || pullRequestId.equalsIgnoreCase("false")) {
+    ViolationsLogger violationsLogger =
+        new ViolationsLogger() {
+          @Override
+          public void log(final Level level, final String string) {
+            System.out.println(level + " " + string);
+          }
+
+          @Override
+          public void log(final Level level, final String string, final Throwable t) {
+            final StringWriter sw = new StringWriter();
+            t.printStackTrace(new PrintWriter(sw));
+            System.out.println(level + " " + string + "\n" + sw.toString());
+          }
+        };
+    if (!this.showDebugInfo) {
+      violationsLogger = FilteringViolationsLogger.filterLevel(violationsLogger);
+    }
+
+    if (this.pullRequestId == null || this.pullRequestId.equalsIgnoreCase("false")) {
       System.out.println("No pull request id defined, will not send violation comments to GitHub.");
       return;
     }
-    final Integer pullRequestIdInt = Integer.valueOf(pullRequestId);
-    if (oAuth2Token != null) {
+    final Integer pullRequestIdInt = Integer.valueOf(this.pullRequestId);
+    if (this.oAuth2Token != null) {
       System.out.println("Using OAuth2Token");
-    } else if (username != null && password != null) {
-      System.out.println("Using username/password: " + username.substring(0, 1) + ".../*********");
+    } else if (this.username != null && this.password != null) {
+      System.out.println(
+          "Using username/password: " + this.username.substring(0, 1) + ".../*********");
     } else {
       System.err.println(
           "No OAuth2 token and no username/email specified. Will not comment any pull request.");
@@ -198,61 +221,49 @@ public class Runner {
 
     System.out.println(
         "Will comment PR "
-            + repositoryOwner
+            + this.repositoryOwner
             + "/"
-            + repositoryName
+            + this.repositoryName
             + "/"
-            + pullRequestId
+            + this.pullRequestId
             + " on "
-            + gitHubUrl);
+            + this.gitHubUrl);
 
-    List<Violation> allParsedViolations = new ArrayList<>();
-    for (final List<String> configuredViolation : violations) {
+    Set<Violation> allParsedViolations = new TreeSet<>();
+    for (final List<String> configuredViolation : this.violations) {
       final String reporter = configuredViolation.size() >= 4 ? configuredViolation.get(3) : null;
-      final List<Violation> parsedViolations =
+      final Set<Violation> parsedViolations =
           violationsApi() //
               .findAll(Parser.valueOf(configuredViolation.get(0))) //
               .inFolder(configuredViolation.get(1)) //
               .withPattern(configuredViolation.get(2)) //
               .withReporter(reporter) //
               .violations();
-      if (minSeverity != null) {
-        allParsedViolations = Filtering.withAtLEastSeverity(allParsedViolations, minSeverity);
+      if (this.minSeverity != null) {
+        allParsedViolations = Filtering.withAtLEastSeverity(allParsedViolations, this.minSeverity);
       }
       allParsedViolations.addAll(parsedViolations);
     }
 
     try {
-      violationCommentsToGitHubApi() //
-          .withoAuth2Token(oAuth2Token) //
-          .withUsername(username) //
-          .withPassword(password) //
-          .withPullRequestId(pullRequestIdInt) //
-          .withRepositoryName(repositoryName) //
-          .withRepositoryOwner(repositoryOwner) //
-          .withGitHubUrl(gitHubUrl) //
-          .withViolations(allParsedViolations) //
-          .withCreateCommentWithAllSingleFileComments(createCommentWithAllSingleFileComments) //
-          .withCreateSingleFileComments(createSingleFileComments) //
-          .withCommentOnlyChangedContent(commentOnlyChangedContent) //
-          .withCommentOnlyChangedFiles(commentOnlyChangedFiles) //
-          .withKeepOldComments(keepOldComments) //
-          .withCommentTemplate(commentTemplate) //
-          .withMaxNumberOfViolations(maxNumberOfViolations) //
-          .withViolationsLogger(
-              new ViolationsLogger() {
-                @Override
-                public void log(final Level level, final String string) {
-                  System.out.println(level + " " + string);
-                }
-
-                @Override
-                public void log(final Level level, final String string, final Throwable t) {
-                  final StringWriter sw = new StringWriter();
-                  t.printStackTrace(new PrintWriter(sw));
-                  System.out.println(level + " " + string + "\n" + sw.toString());
-                }
-              }) //
+      violationCommentsToGitHubApi()
+          .withoAuth2Token(this.oAuth2Token)
+          .withUsername(this.username)
+          .withPassword(this.password)
+          .withPullRequestId(pullRequestIdInt)
+          .withRepositoryName(this.repositoryName)
+          .withRepositoryOwner(this.repositoryOwner)
+          .withGitHubUrl(this.gitHubUrl)
+          .withViolations(allParsedViolations)
+          .withCreateCommentWithAllSingleFileComments(
+              this.createCommentWithAllSingleFileComments) //
+          .withCreateSingleFileComments(this.createSingleFileComments) //
+          .withCommentOnlyChangedContent(this.commentOnlyChangedContent) //
+          .withCommentOnlyChangedFiles(this.commentOnlyChangedFiles) //
+          .withKeepOldComments(this.keepOldComments) //
+          .withCommentTemplate(this.commentTemplate) //
+          .withMaxNumberOfViolations(this.maxNumberOfViolations) //
+          .withViolationsLogger(violationsLogger) //
           .toPullRequest();
     } catch (final Exception e) {
       e.printStackTrace();
@@ -262,35 +273,35 @@ public class Runner {
   @Override
   public String toString() {
     return "Runner [repositoryOwner="
-        + repositoryOwner
+        + this.repositoryOwner
         + ", repositoryName="
-        + repositoryName
+        + this.repositoryName
         + ", pullRequestId="
-        + pullRequestId
+        + this.pullRequestId
         + ", oAuth2Token="
-        + oAuth2Token
+        + this.oAuth2Token
         + ", username="
-        + username
+        + this.username
         + ", password="
-        + password
+        + this.password
         + ", gitHubUrl="
-        + gitHubUrl
+        + this.gitHubUrl
         + ", violations="
-        + violations
+        + this.violations
         + ", createCommentWithAllSingleFileComments="
-        + createCommentWithAllSingleFileComments
+        + this.createCommentWithAllSingleFileComments
         + ", createSingleFileComments="
-        + createSingleFileComments
+        + this.createSingleFileComments
         + ", commentOnlyChangedContent="
-        + commentOnlyChangedContent
+        + this.commentOnlyChangedContent
         + ", minSeverity="
-        + minSeverity
+        + this.minSeverity
         + ", keepOldComments="
-        + keepOldComments
+        + this.keepOldComments
         + ", commentTemplate="
-        + commentTemplate
+        + this.commentTemplate
         + ", maxNumberOfViolations="
-        + maxNumberOfViolations
+        + this.maxNumberOfViolations
         + "]";
   }
 }
