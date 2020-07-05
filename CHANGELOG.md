@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.13
+### No issue
+
+**New: custom logging in violations-lib**
+
+
+[d663674b21ffdde](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/d663674b21ffdde) Tomas Bjerre *2020-07-05 12:28:31*
+
+
 ## 1.12
 ### GitHub #9   
 
