@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.15
+### No issue
+
+**violations-lib 1.128**
+
+
+[694a2981eca6c21](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/694a2981eca6c21) Tomas Bjerre *2020-09-20 13:41:56*
+
+
 ## 1.14
 ### No issue
 
