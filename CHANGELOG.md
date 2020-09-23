@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.16
+### No issue
+
+**Allow Checkstyle reports with no line**
+
+
+[94d78875aad9449](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/94d78875aad9449) Tomas Bjerre *2020-09-23 16:58:26*
+
+
 ## 1.15
 ### No issue
 
