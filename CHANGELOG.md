@@ -3,6 +3,15 @@
 
 Changelog of Violation comments to github command line.
 
+## 1.17
+### No issue
+
+**Find Security Bugs messages**
+
+
+[c77b9eca2fd0433](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/c77b9eca2fd0433) Tomas Bjerre *2020-09-27 17:39:44*
+
+
 ## 1.16
 ### No issue
 
