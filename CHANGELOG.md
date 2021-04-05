@@ -1,7 +1,16 @@
 
- # Violation comments to github command line changelog
+# violation-comments-to-github-command-line changelog
 
-Changelog of Violation comments to github command line.
+Changelog of violation-comments-to-github-command-line.
+
+## 1.19.0
+### No issue
+
+**new build script**
+
+
+[5e54a2f6946c0fc](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/5e54a2f6946c0fc) Tomas Bjerre *2021-04-05 11:58:52*
+
 
 ## 1.17
 ### No issue
@@ -174,4 +183,3 @@ Changelog of Violation comments to github command line.
 [fc7781d9bde9bf8](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/fc7781d9bde9bf8) Tomas Bjerre *2019-06-01 15:19:55*
 
 
- 
