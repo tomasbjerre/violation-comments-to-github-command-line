@@ -1,6 +1,5 @@
 # Violation Comments To GitHub Command Line
 
-[![Build Status](https://travis-ci.org/tomasbjerre/violation-comments-to-github-command-line.svg?branch=master)](https://travis-ci.org/tomasbjerre/violation-comments-to-github-command-line)
 [![NPM](https://img.shields.io/npm/v/violation-comments-to-github-command-line.svg?style=flat-square) ](https://www.npmjs.com/package/violation-comments-to-github-command-line)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/se.bjurr.violations/violation-comments-to-github-command-line/badge.svg)](https://maven-badges.herokuapp.com/maven-central/se.bjurr.violations/violation-comments-to-github-command-line)
 
