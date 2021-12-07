@@ -2,6 +2,18 @@
 
 Changelog of violation-comments-to-github-command-line.
 
+## [1.21.6](https://github.com/tomasbjerre/violation-comments-to-github-command-line/releases/tag/1.21.6) (2021-12-07)
+
+
+
+
+
+### Bug Fixes
+
+-  renaming SARIFPARSER to SARIF ([690b7](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/690b7188c574561))  
+
+
+
 ## [1.21.4](https://github.com/tomasbjerre/violation-comments-to-github-command-line/releases/tag/1.21.4) (2021-12-07)
 
 
