@@ -2,6 +2,22 @@
 
 Changelog of violation-comments-to-github-command-line.
 
+## [1.21.4](https://github.com/tomasbjerre/violation-comments-to-github-command-line/releases/tag/1.21.4) (2021-12-07)
+
+
+
+
+
+
+
+### Other changes
+
+**sarif**
+
+
+[82b8d](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/82b8dafb35ca297) Tomas Bjerre *2021-12-07 04:41:02*
+
+
 ## [1.21.0](https://github.com/tomasbjerre/violation-comments-to-github-command-line/releases/tag/1.21.0) (2021-11-20)
 
 
