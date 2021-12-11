@@ -2,6 +2,18 @@
 
 Changelog of violation-comments-to-github-command-line.
 
+## [1.22.0](https://github.com/tomasbjerre/violation-comments-to-github-command-line/releases/tag/1.22.0) (2021-12-11)
+
+
+
+### Features
+
+-  Dart MACHINE parser ([aac96](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/aac9699a6622c82))  [#142](https://github.com/tomasbjerre/violation-comments-to-github-command-line/issues/142)  
+
+
+
+
+
 ## [1.21.6](https://github.com/tomasbjerre/violation-comments-to-github-command-line/releases/tag/1.21.6) (2021-12-07)
 
 
