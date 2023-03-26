@@ -2,6 +2,12 @@
 
 Changelog of violation-comments-to-github-command-line.
 
+## 1.25.0 (2023-03-26)
+
+### Features
+
+-  stepping violations-lib ([7151e](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/7151e1300ce6d66) Tomas Bjerre)  
+
 ## 1.24.0 (2022-09-01)
 
 ### Features
