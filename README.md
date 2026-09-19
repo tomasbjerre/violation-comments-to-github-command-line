@@ -134,90 +134,62 @@ Missing a format? Open an issue [here](https://github.com/tomasbjerre/violations
 # Usage
 
 ```shell
--comment-only-changed-content, -cocc <boolean>          <boolean>: true or false
-                                                        Default: true
--comment-only-changed-files, -cocf <boolean>            True if only changed 
-                                                        files should be commented. 
-                                                        False if all findings should 
-                                                        be commented.
-                                                        <boolean>: true or false
-                                                        Default: true
--comment-template <string>                              See https://github.
-                                                        com/tomasbjerre/violation-comments-lib
-                                                        <string>: any string
-                                                        Default: 
--create-comment-with-all-single-file-comments, -        <boolean>: true or false
-ccwasfc <boolean>                                       Default: false
--create-single-file-comments, -csfc <boolean>           <boolean>: true or false
-                                                        Default: true
--github-url, -ghu <string>                              <string>: any string
-                                                        Default: https://api.github.com/
--h, --help <argument-to-print-help-for>                 <argument-to-print-help-for>: an argument to print help for
-                                                        Default: If no specific parameter is given the whole usage text is given
--keep-old-comments <boolean>                            <boolean>: true or false
-                                                        Default: false
--max-number-of-violations, -max <integer>               <integer>: -2,147,483,648 to 2,147,483,647
-                                                        Default: 2,147,483,647
--oauth2-token, -ot <string>                             <string>: any string
-                                                        Default: 
--password, -p <string>                                  <string>: any string
-                                                        Default: 
--pull-request-id, -prid <string>                        <string>: any string [Required]
--repository-name, -rn <string>                          Example: 'violations-
-                                                        test' [Required]
-                                                        <string>: any string
--repository-owner, -ro <string>                         Example: 'tomasbjerre' [Required]
-                                                        <string>: any string
--severity, -s <SEVERITY>                                Minimum severity level 
-                                                        to report.
-                                                        <SEVERITY>: {INFO | WARN | ERROR}
-                                                        Default: INFO
--show-debug-info                                        Please run your 
-                                                        command with this parameter 
-                                                        and supply output when 
-                                                        reporting bugs.
-                                                        Default: disabled
--use-review-comments, -urc <boolean>                    True if single file 
-                                                        comments should be batched into 
-                                                        one pull request review 
-                                                        instead of one HTTP request 
-                                                        per comment. GitHub 
-                                                        applies this atomically: if 
-                                                        any comment in the batch 
-                                                        has an invalid diff 
-                                                        position, none of them are 
-                                                        created.
-                                                        <boolean>: true or false
-                                                        Default: false
--username, -u <string>                                  <string>: any string
-                                                        Default: 
---violations, -v <string>                               The violations to look 
-                                                        for. <PARSER> <FOLDER> 
-                                                        <REGEXP PATTERN> <NAME> where 
-                                                        PARSER is one of: 
-                                                        ANDROIDLINT, ANSIBLELATER, 
-                                                        CHECKSTYLE, CODENARC, CLANG, 
-                                                        COVERITY, CPD, CPPCHECK, 
-                                                        CPPLINT, CSSLINT, GENERIC, GHS, 
-                                                        FINDBUGS, FLAKE8, MACHINE, 
-                                                        FXCOP, GENDARME, IAR, JACOCO, 
-                                                        JCREPORT, JSLINT, JUNIT, LINT, 
-                                                        KLOCWORK, KOTLINMAVEN, 
-                                                        KOTLINGRADLE, MSCPP, MSBULDLOG, 
-                                                        MYPY, GOLINT, PERLCRITIC, 
-                                                        PITEST, PMD, PROTOLINT, 
-                                                        PYDOCSTYLE, PYLINT, RESHARPER, 
-                                                        SARIF, SBTSCALAC, SEMGREP, 
-                                                        SIMIAN, SONAR, STYLECOP, 
-                                                        XMLLINT, YAMLLINT, ZPTLINT, 
-                                                        DOCFX, PCLINT, CODECLIMATE, 
-                                                        XUNIT, VALGRIND
-                                                         Example: -v 
-                                                        "JSHINT" "." ".*/jshint.xml$" 
-                                                        "JSHint" [Supports Multiple occurrences]
-                                                        <string>: any string
-                                                        Default: Empty list
+Usage: violation-comments-to-github-command-line [-h] [-show-debug-info]
+       [-ccwasfc=<createCommentWithAllSingleFileComments>]
+       [-cocc=<commentOnlyChangedContent>] [-cocf=<commentOnlyChangedFiles>]
+       [-comment-template=<commentTemplate>] [-csfc=<createSingleFileComments>]
+       [-ghu=<gitHubUrl>] [-keep-old-comments=<keepOldComments>]
+       [-max=<maxNumberOfViolations>] [-ot=<oAuth2Token>] [-p=<password>]
+       -prid=<pullRequestId> -rn=<repositoryName> -ro=<repositoryOwner>
+       [-s=<minSeverity>] [-u=<username>] [-urc=<useReviewComments>]
+       [-v=<violations> <violations> <violations> <violations>]...
+      -ccwasfc, -create-comment-with-all-single-file-comments=<createCommentWith
+        AllSingleFileComments>
 
+      -cocc, -comment-only-changed-content=<commentOnlyChangedContent>
+
+      -cocf, -comment-only-changed-files=<commentOnlyChangedFiles>
+                             True if only changed files should be commented.
+                               False if all findings should be commented.
+      -comment-template=<commentTemplate>
+                             See https://github.
+                               com/tomasbjerre/violation-comments-lib
+      -csfc, -create-single-file-comments=<createSingleFileComments>
+
+      -ghu, -github-url=<gitHubUrl>
+
+  -h, --help                 Show this help message and exit.
+      -keep-old-comments=<keepOldComments>
+
+      -max, -max-number-of-violations=<maxNumberOfViolations>
+
+      -ot, -oauth2-token=<oAuth2Token>
+
+  -p, -password=<password>
+      -prid, -pull-request-id=<pullRequestId>
+
+      -rn, -repository-name=<repositoryName>
+                             Example: 'violations-test'
+      -ro, -repository-owner=<repositoryOwner>
+                             Example: 'tomasbjerre'
+  -s, -severity=<minSeverity>
+                             Minimum severity level to report.
+      -show-debug-info       Please run your command with this parameter and
+                               supply output when reporting bugs.
+  -u, -username=<username>
+      -urc, -use-review-comments=<useReviewComments>
+                             True if single file comments should be batched
+                               into one pull request review instead of one HTTP
+                               request per comment. GitHub applies this
+                               atomically: if any comment in the batch has an
+                               invalid diff position, none of them are created.
+  -v, --violations=<violations> <violations> <violations> <violations>
+                             The violations to look for. <PARSER> <FOLDER>
+                               <REGEXP PATTERN> <NAME> where PARSER is one of
+                               the values of se.bjurr.violations.lib.reports.
+                               Parser (see supported formats table in README
+                               for the full list).
+                             Example: -v "JSHINT" "." ".*/jshint.xml$" "JSHint"
 ```
 
 Checkout the [Violations Lib](https://github.com/tomasbjerre/violations-lib) for more documentation.

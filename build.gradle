@@ -5,7 +5,7 @@ plugins {
 dependencies {
 	implementation "se.bjurr.violations:violation-comments-to-github-lib:1.84.0"
 	implementation "se.bjurr.violations:violations-lib:3.0.0"
-	implementation 'se.softhouse:jargo:0.4.14'
+	implementation 'info.picocli:picocli:4.7.7'
 	implementation "org.slf4j:slf4j-simple:2.0.19"
 }
 
