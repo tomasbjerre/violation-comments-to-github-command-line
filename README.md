@@ -1,18 +1,17 @@
 # Violation Comments To GitHub Command Line
 
-[![NPM](https://img.shields.io/npm/v/violation-comments-to-github-command-line.svg?style=flat-square) ](https://www.npmjs.com/package/violation-comments-to-github-command-line)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/se.bjurr.violations/violation-comments-to-github-command-line/badge.svg)](https://maven-badges.herokuapp.com/maven-central/se.bjurr.violations/violation-comments-to-github-command-line)
-
---------------------
-Archived, see motivation here https://github.com/tomasbjerre/violation-comments-to-github-lib
---------------------
-
+[![NPM](https://img.shields.io/npm/v/violation-comments-to-github-command-line.svg?style=flat-square)](https://www.npmjs.com/package/violation-comments-to-github-command-line)
+[![Maven Central](https://img.shields.io/maven-central/v/se.bjurr.violations/violation-comments-to-github-command-line.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/se.bjurr.violations/violation-comments-to-github-command-line)
+[![NPM Downloads](https://img.shields.io/npm/dm/violation-comments-to-github-command-line.svg?style=flat)](https://www.npmjs.com/package/violation-comments-to-github-command-line)
+[![Docker Pulls](https://badgen.net/docker/pulls/tomasbjerre/violation-comments-to-github-command-line?icon=docker&label=pulls)](https://hub.docker.com/r/tomasbjerre/violation-comments-to-github-command-line/)
 
 Report static code analysis to GitHub. It uses the [Violations Lib](https://github.com/tomasbjerre/violations-lib).
 
 ![GitHub Comment](/github-comment.png)
 
-The runnable can be found in [NPM](https://www.npmjs.com/package/violation-comments-to-github-command-line).
+- The runnable `jar` can be found in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22violation-comments-to-github-command-line%22) and used like `java -jar violation-comments-to-github-command-line-*.jar ....`.
+- The runnable can be found in [NPM](https://www.npmjs.com/package/violation-comments-to-github-command-line).
+- The `Docker` image can be found in [Dockerhub](https://hub.docker.com/r/tomasbjerre/violation-comments-to-github-command-line) and used like `docker run --mount src="$(pwd)",target=/usr/src/violation-comments-to-github-command-line,type=bind tomasbjerre/violation-comments-to-github-command-line:X`.
 
 Run it with:
 
@@ -64,6 +63,7 @@ A number of **parsers** have been implemented. Some **parsers** can parse output
 | [_CloudFormation Linter_](https://github.com/aws-cloudformation/cfn-lint)             | `JUNIT`              | `cfn-lint . -f junit --output-file report-junit.xml`
 | [_CodeClimate_](https://codeclimate.com/)                                             | `CODECLIMATE`        | 
 | [_CodeNarc_](http://codenarc.sourceforge.net/)                                        | `CODENARC`           | 
+| [_Coverity_](https://scan.coverity.com/)                                              | `COVERITY`           | 
 | [_Dart_](https://dart.dev/)                                                           | `MACHINE`            | With `dart analyze --format=machine`
 | [_Dependency Check_](https://jeremylong.github.io/DependencyCheck/)                   | `SARIF`              | Using `--format SARIF`
 | [_Detekt_](https://github.com/arturbosch/detekt)                                      | `CHECKSTYLE`         | With `--output-format xml`.
@@ -81,7 +81,6 @@ A number of **parsers** have been implemented. Some **parsers** can parse output
 | [_GoLint_](https://github.com/golang/lint)                                            | `GOLINT`             | 
 | [_GoVet_](https://golang.org/cmd/vet/)                                                | `GOLINT`             | Same format as GoLint.
 | [_GolangCI-Lint_](https://github.com/golangci/golangci-lint/)                         | `CHECKSTYLE`         | With `--out-format=checkstyle`.
-| [_GoogleErrorProne_](https://github.com/google/error-prone)                           | `GOOGLEERRORPRONE`   | 
 | [_HadoLint_](https://github.com/hadolint/hadolint/)                                   | `CHECKSTYLE`         | With `-f checkstyle`
 | [_IAR_](https://www.iar.com/iar-embedded-workbench/)                                  | `IAR`                | With `--no_wrap_diagnostics`
 | [_Infer_](http://fbinfer.com/)                                                        | `PMD`                | Facebook Infer. With `--pmd-xml`.
@@ -98,9 +97,8 @@ A number of **parsers** have been implemented. Some **parsers** can parse output
 | [_MSCpp_](https://visualstudio.microsoft.com/vs/features/cplusplus/)                  | `MSCPP`              | 
 | [_Mccabe_](https://pypi.python.org/pypi/mccabe)                                       | `FLAKE8`             | 
 | [_MyPy_](https://pypi.python.org/pypi/mypy-lang)                                      | `MYPY`               | 
-| [_NullAway_](https://github.com/uber/NullAway)                                        | `GOOGLEERRORPRONE`   | Same format as Google Error Prone.
 | [_PCLint_](http://www.gimpel.com/html/pcl.htm)                                        | `PCLINT`             | PC-Lint using the same output format as the Jenkins warnings plugin, [_details here_](https://wiki.jenkins.io/display/JENKINS/PcLint+options)
-| [_PHPCS_](https://github.com/squizlabs/PHP_CodeSniffer)                               | `CHECKSTYLE`         | With `phpcs api.php --report=checkstyle`.
+| [_PHPCS_](https://github.com/PHPCSStandards/PHP_CodeSniffer)                          | `CHECKSTYLE`         | With `phpcs api.php --report=checkstyle`.
 | [_PHPPMD_](https://phpmd.org/)                                                        | `PMD`                | With `phpmd api.php xml ruleset.xml`.
 | [_PMD_](https://pmd.github.io/)                                                       | `PMD`                | 
 | [_Pep8_](https://github.com/PyCQA/pycodestyle)                                        | `FLAKE8`             | 
@@ -129,7 +127,7 @@ A number of **parsers** have been implemented. Some **parsers** can parse output
 | [_YAMLLint_](https://yamllint.readthedocs.io/en/stable/index.html)                    | `YAMLLINT`           | With `-f parsable`
 | [_ZPTLint_](https://pypi.python.org/pypi/zptlint)                                     | `ZPTLINT`            |
 
-51 parsers and 78 reporters.
+51 parsers and 77 reporters.
 
 Missing a format? Open an issue [here](https://github.com/tomasbjerre/violations-lib/issues)!
 
@@ -179,31 +177,47 @@ ccwasfc <boolean>                                       Default: false
                                                         and supply output when 
                                                         reporting bugs.
                                                         Default: disabled
+-use-review-comments, -urc <boolean>                    True if single file 
+                                                        comments should be batched into 
+                                                        one pull request review 
+                                                        instead of one HTTP request 
+                                                        per comment. GitHub 
+                                                        applies this atomically: if 
+                                                        any comment in the batch 
+                                                        has an invalid diff 
+                                                        position, none of them are 
+                                                        created.
+                                                        <boolean>: true or false
+                                                        Default: false
 -username, -u <string>                                  <string>: any string
                                                         Default: 
 --violations, -v <string>                               The violations to look 
                                                         for. <PARSER> <FOLDER> 
                                                         <REGEXP PATTERN> <NAME> where 
                                                         PARSER is one of: 
-                                                        ANDROIDLINT, CHECKSTYLE, CODENARC, 
-                                                        CLANG, CPD, CPPCHECK, 
-                                                        CPPLINT, CSSLINT, FINDBUGS, 
-                                                        FLAKE8, FXCOP, GENDARME, IAR, 
-                                                        JCREPORT, JSHINT, LINT, 
+                                                        ANDROIDLINT, ANSIBLELATER, 
+                                                        CHECKSTYLE, CODENARC, CLANG, 
+                                                        COVERITY, CPD, CPPCHECK, 
+                                                        CPPLINT, CSSLINT, GENERIC, GHS, 
+                                                        FINDBUGS, FLAKE8, MACHINE, 
+                                                        FXCOP, GENDARME, IAR, JACOCO, 
+                                                        JCREPORT, JSLINT, JUNIT, LINT, 
                                                         KLOCWORK, KOTLINMAVEN, 
-                                                        KOTLINGRADLE, MSCPP, MYPY, GOLINT, 
-                                                        GOOGLEERRORPRONE, PERLCRITIC, PITEST, 
-                                                        PMD, PYDOCSTYLE, PYLINT, 
-                                                        RESHARPER, SBTSCALAC, SIMIAN, 
-                                                        SONAR, STYLECOP, XMLLINT, 
-                                                        YAMLLINT, ZPTLINT, DOCFX, PCLINT
-                                                        
-                                                         Example: -v "JSHINT" 
-                                                        "." ".*/jshint.xml$" 
+                                                        KOTLINGRADLE, MSCPP, MSBULDLOG, 
+                                                        MYPY, GOLINT, PERLCRITIC, 
+                                                        PITEST, PMD, PROTOLINT, 
+                                                        PYDOCSTYLE, PYLINT, RESHARPER, 
+                                                        SARIF, SBTSCALAC, SEMGREP, 
+                                                        SIMIAN, SONAR, STYLECOP, 
+                                                        XMLLINT, YAMLLINT, ZPTLINT, 
+                                                        DOCFX, PCLINT, CODECLIMATE, 
+                                                        XUNIT, VALGRIND
+                                                         Example: -v 
+                                                        "JSHINT" "." ".*/jshint.xml$" 
                                                         "JSHint" [Supports Multiple occurrences]
                                                         <string>: any string
                                                         Default: Empty list
-                                                        Default: Empty list
+
 ```
 
 Checkout the [Violations Lib](https://github.com/tomasbjerre/violations-lib) for more documentation.

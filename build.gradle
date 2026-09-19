@@ -1,35 +1,23 @@
-apply plugin: 'java'
-
-buildscript {
- repositories {
-  mavenCentral()
-  mavenLocal()
- }
- dependencies {
-  classpath 'se.bjurr.gradle:gradle-scripts:2.+'
- }
+plugins {
+	id "se.bjurr.gradle.bundle-command-shadow" version "2.4.0"
 }
-project.ext.buildConfig = [
-  repoType: "COMMAND",
-  publishing: [
-    relocate: [
-      "org:org",
-      "com:com"
-    ]
-  ],
-  violations: [
-    updateReadme: true
-  ],
-  manifest: [
-    mainClass: 'se.bjurr.violations.main.Main'
-  ]
-]
-apply from: project.buildscript.classLoader.getResource('main.gradle').toURI()
-
 
 dependencies {
- implementation 'se.bjurr.violations:violation-comments-to-github-lib:1.83.1'
- implementation 'se.bjurr.violations:violations-lib:1.156.3'
- implementation 'se.softhouse:jargo:0.4.14'
- implementation 'org.slf4j:slf4j-simple:2.0.0'
+	implementation "se.bjurr.violations:violation-comments-to-github-lib:1.84.0"
+	implementation "se.bjurr.violations:violations-lib:3.0.0"
+	implementation 'se.softhouse:jargo:0.4.14'
+	implementation "org.slf4j:slf4j-simple:2.0.19"
+}
+
+shadowExtension {
+	mainClass.set("se.bjurr.violations.main.Main")
+	relocate.set("org:org,com:com")
+}
+
+staticCodeAnalysisExtension {
+	maxViolations.set(0)
+}
+
+javaExtension {
+	javaVersion = 17
 }
