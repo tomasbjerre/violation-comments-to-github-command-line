@@ -1,0 +1,14 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    uses: tomasbjerre/.github/.github/workflows/bundle-gradle-command-line-release.yaml@master
+    secrets: inherit

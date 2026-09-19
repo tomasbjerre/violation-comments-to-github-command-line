@@ -11,6 +11,7 @@ import static se.softhouse.jargo.Arguments.optionArgument;
 import static se.softhouse.jargo.Arguments.stringArgument;
 import static se.softhouse.jargo.CommandLineParser.withArguments;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class Runner {
 
   private String repositoryOwner;
   private String repositoryName;
+
   /**
    * Travis will define TRAVIS_PULL_REQUEST as "false" if not a PR, and an integer if a PR. Having
    * this as String makes life easier =)
@@ -52,10 +54,11 @@ public class Runner {
   private boolean keepOldComments;
   private String commentTemplate;
   private Integer maxNumberOfViolations;
-  private boolean commentOnlyChangedFiles = true;
-  private boolean showDebugInfo;
+  private boolean commentOnlyChangedFiles = true; // NOPMD only read in main()
+  private boolean showDebugInfo; // NOPMD only read in main()
+  private boolean useReviewComments = false;
 
-  public void main(final String args[]) throws Exception {
+  public void main(final String... args) throws Exception {
     final Argument<?> helpArgument = helpArgument("-h", "--help");
     final String parsersString =
         Arrays.asList(Parser.values()).stream()
@@ -95,6 +98,15 @@ public class Runner {
             .build();
     final Argument<Boolean> createSingleFileCommentsArg =
         booleanArgument("-create-single-file-comments", "-csfc").defaultValue(true).build();
+    final Argument<Boolean> useReviewCommentsArg =
+        booleanArgument("-use-review-comments", "-urc")
+            .defaultValue(false)
+            .description(
+                "True if single file comments should be batched into one pull request review"
+                    + " instead of one HTTP request per comment. GitHub applies this atomically:"
+                    + " if any comment in the batch has an invalid diff position, none of them are"
+                    + " created.")
+            .build();
     final Argument<Boolean> keepOldCommentsArg =
         booleanArgument("-keep-old-comments").defaultValue(false).build();
     final Argument<String> commentTemplateArg =
@@ -136,6 +148,7 @@ public class Runner {
                   commentOnlyChangedFilesArg, //
                   createCommentWithAllSingleFileCommentsArg, //
                   createSingleFileCommentsArg, //
+                  useReviewCommentsArg, //
                   keepOldCommentsArg, //
                   commentTemplateArg, //
                   repositoryOwnerArg, //
@@ -156,6 +169,7 @@ public class Runner {
       this.createCommentWithAllSingleFileComments =
           parsed.get(createCommentWithAllSingleFileCommentsArg);
       this.createSingleFileComments = parsed.get(createSingleFileCommentsArg);
+      this.useReviewComments = parsed.get(useReviewCommentsArg);
       this.keepOldComments = parsed.get(keepOldCommentsArg);
       this.commentTemplate = parsed.get(commentTemplateArg);
 
@@ -169,7 +183,7 @@ public class Runner {
       this.maxNumberOfViolations = parsed.get(maxNumberOfViolationsArg);
       this.showDebugInfo = parsed.wasGiven(showDebugInfo);
       if (this.showDebugInfo) {
-        System.out.println(
+        System.out.println( // NOPMD
             "Given parameters:\n"
                 + Arrays.asList(args).stream()
                     .map((it) -> it.toString())
@@ -179,22 +193,27 @@ public class Runner {
       }
 
     } catch (final ArgumentException exception) {
-      System.out.println(exception.getMessageAndUsage());
-      System.exit(1);
+      System.out.println(exception.getMessageAndUsage()); // NOPMD
+      System.exit(1); // NOPMD
     }
 
     ViolationsLogger violationsLogger =
         new ViolationsLogger() {
           @Override
           public void log(final Level level, final String string) {
-            System.out.println(level + " " + string);
+            System.out.println(level + " " + string); // NOPMD
           }
 
           @Override
+          @SuppressFBWarnings(
+              value = "INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE",
+              justification =
+                  "Printing the stack trace to this CLI's own stdout is the intended behavior")
           public void log(final Level level, final String string, final Throwable t) {
             final StringWriter sw = new StringWriter();
-            t.printStackTrace(new PrintWriter(sw));
-            System.out.println(level + " " + string + "\n" + sw.toString());
+            t.printStackTrace(
+                new PrintWriter(sw)); // NOPMD writes to an in-memory buffer, not System.err
+            System.out.println(level + " " + string + "\n" + sw.toString()); // NOPMD
           }
         };
     if (!this.showDebugInfo) {
@@ -202,22 +221,22 @@ public class Runner {
     }
 
     if (this.pullRequestId == null || this.pullRequestId.equalsIgnoreCase("false")) {
-      System.out.println("No pull request id defined, will not send violation comments to GitHub.");
+      System.out.println( // NOPMD
+          "No pull request id defined, will not send violation comments to GitHub.");
       return;
     }
-    final Integer pullRequestIdInt = Integer.valueOf(this.pullRequestId);
     if (this.oAuth2Token != null) {
-      System.out.println("Using OAuth2Token");
+      System.out.println("Using OAuth2Token"); // NOPMD
     } else if (this.username != null && this.password != null) {
-      System.out.println(
+      System.out.println( // NOPMD
           "Using username/password: " + this.username.substring(0, 1) + ".../*********");
     } else {
-      System.err.println(
+      System.err.println( // NOPMD
           "No OAuth2 token and no username/email specified. Will not comment any pull request.");
       return;
     }
 
-    System.out.println(
+    System.out.println( // NOPMD
         "Will comment PR "
             + this.repositoryOwner
             + "/"
@@ -249,7 +268,7 @@ public class Runner {
           .withoAuth2Token(this.oAuth2Token)
           .withUsername(this.username)
           .withPassword(this.password)
-          .withPullRequestId(pullRequestIdInt)
+          .withPullRequestId(Integer.parseInt(this.pullRequestId))
           .withRepositoryName(this.repositoryName)
           .withRepositoryOwner(this.repositoryOwner)
           .withGitHubUrl(this.gitHubUrl)
@@ -257,6 +276,7 @@ public class Runner {
           .withCreateCommentWithAllSingleFileComments(
               this.createCommentWithAllSingleFileComments) //
           .withCreateSingleFileComments(this.createSingleFileComments) //
+          .withUseReviewComments(this.useReviewComments) //
           .withCommentOnlyChangedContent(this.commentOnlyChangedContent) //
           .withCommentOnlyChangedFiles(this.commentOnlyChangedFiles) //
           .withKeepOldComments(this.keepOldComments) //
@@ -265,7 +285,7 @@ public class Runner {
           .withViolationsLogger(violationsLogger) //
           .toPullRequest();
     } catch (final Exception e) {
-      e.printStackTrace();
+      e.printStackTrace(); // NOPMD
     }
   }
 
@@ -291,6 +311,8 @@ public class Runner {
         + this.createCommentWithAllSingleFileComments
         + ", createSingleFileComments="
         + this.createSingleFileComments
+        + ", useReviewComments="
+        + this.useReviewComments
         + ", commentOnlyChangedContent="
         + this.commentOnlyChangedContent
         + ", minSeverity="
