@@ -9,6 +9,11 @@ Report static code analysis to GitHub. It uses the [Violations Lib](https://gith
 
 ![GitHub Comment](/github-comment.png)
 
+| Version           | Java Version |
+| ------------------| ------------ |
+| version < 1.26.0  | 11           |
+| 1.26.0 <= version | 17           |
+
 - The runnable `jar` can be found in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22violation-comments-to-github-command-line%22) and used like `java -jar violation-comments-to-github-command-line-*.jar ....`.
 - The runnable can be found in [NPM](https://www.npmjs.com/package/violation-comments-to-github-command-line).
 - The `Docker` image can be found in [Dockerhub](https://hub.docker.com/r/tomasbjerre/violation-comments-to-github-command-line) and used like `docker run --mount src="$(pwd)",target=/usr/src/violation-comments-to-github-command-line,type=bind tomasbjerre/violation-comments-to-github-command-line:X`.
