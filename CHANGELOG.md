@@ -1,3 +1,21 @@
+## 1.26.0 (2026-09-19)
+
+### Features
+
+-  modernize build tooling and batch single file comments into a review ([ad669](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/ad66952291a2d4f) Tomas Bjerre)  
+
+### Bug Fixes
+
+-  remove stray quotes from gradle.properties group and description ([3fe2a](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/3fe2abb85f0c86d) Tomas Bjerre)  
+
+### Other changes
+
+**Update README.md**
+
+
+[cda55](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/cda55399ad1bd34) Tomas Bjerre *2023-07-30 15:21:59*
+
+
 # violation-comments-to-github-command-line changelog
 
 Changelog of violation-comments-to-github-command-line.
