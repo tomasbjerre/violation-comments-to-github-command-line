@@ -25,6 +25,8 @@ npx violation-comments-to-github-command-line \
  -v "JSHINT" "." ".*jshint/report\.xml$" "JSHint"
 ```
 
+You may also want to explore Sarif as an alternative to this, se README.md in [violation-comments-to-github-lib](https://github.com/tomasbjerre/violation-comments-to-github-lib).
+
 **You must perform the merge before build**. If you don't perform the merge, the reported violations will refer to other lines then those in the pull request. The merge can be done with a shell script like this.
 
 ```
