@@ -1,3 +1,13 @@
+## 1.26.2 (2026-10-28)
+
+### Dependency updates
+
+- update dependency se.bjurr.violations:violations-lib to v3.0.3 (#12) ([89c53](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/89c5322bde5b200) renovate[bot])  
+- update dependency gradle to v9.8.2 (#11) ([bd8b7](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/bd8b71dd938ea96) renovate[bot])  
+- update dependency se.bjurr.violations:violations-lib to v3.0.2 (#10) ([10341](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/103415c164b5ade) renovate[bot])  
+- update dependency se.bjurr.violations:violation-comments-to-github-lib to v1.84.1 (#8) ([25724](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/2572430045173b6) renovate[bot])  
+- update dependency org.slf4j:slf4j-simple to v2.0.20 ([a0542](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/a0542831e4199bb) renovate[bot])  
+- update dependency gradle to v9.8.1 ([bf18c](https://github.com/tomasbjerre/violation-comments-to-github-command-line/commit/bf18cf09eaf9f26) renovate[bot])  
 ## 1.26.1 (2026-10-03)
 
 ### Dependency updates
